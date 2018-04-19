@@ -1,0 +1,47 @@
+<%= if @current_user do %>
+<div class="row">
+  <div class="col">
+    <script>
+      window.userName = "<%= @current_user.email %>";
+      window.log_path = "<%= log_path(@conn, :index) %>";
+      window.current_user_id = "<%= @current_user.id %>";
+    </script>
+
+    <h5> Past Searches
+      <%= link "Delete All", to: log_path(@conn, :delete_all, @current_user.id),method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span></td>
+    </h5>
+    <div class="over1">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="width1">Route</th>
+          <th class="width4">Stop</th>
+          <th class="width4">DirectionId</th>
+          <th class="width4">Scheduled Arrival</th>
+          <th class="width4">Predicted Arrival</th>
+          <th class="width1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for uu <- Bustracker.History.get_history_by_user_id(@current_user.id) do %>
+          <tr>
+            <td><%= uu.route %></td>
+            <td><%= uu.stop %></td>
+            <td><%= uu.directionId %></td>
+            <td><%= if !(uu.schedule==nil) do String.slice(NaiveDateTime.to_string(uu.schedule),0..10) end %><br/>
+                <%= if !(uu.schedule==nil) do %> <b> <%= String.slice(NaiveDateTime.to_string(uu.schedule),11..18) %> </b> <% end %></td>
+            <td><%= if !(uu.predicted==nil) do String.slice(NaiveDateTime.to_string(uu.predicted),0..10) end%>
+                <%= if (uu.predicted==nil) do "--" end %> 
+                <br/>
+                <%= if !(uu.predicted==nil) do %> <b> <%= String.slice(NaiveDateTime.to_string(uu.predicted),11..18) %> </b> <% end %></td>
+            <td><%= link "Delete", to: log_path(@conn, :delete, uu.id), method: :delete, class: "btn btn-danger btn-xs" %></span></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+  </div>
+</div>
+<% else %>
+<h1>Login to view history</h1>
+<% end %>

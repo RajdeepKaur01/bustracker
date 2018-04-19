@@ -1,0 +1,17 @@
+<%= if @current_user do %>
+<div class="row">
+  <div class="col">
+    <script>
+      window.userName = "<%= @current_user.email %>";
+      window.log_path = "<%= log_path(@conn, :index) %>";
+      window.current_user_id = "<%= @current_user.id %>";
+    </script>
+
+    <div id="root">
+      <p>React app not loaded...</p>
+    </div>
+  </div>
+</div>
+<% else %>
+<h1>Login to track next bus</h1>
+<% end %>

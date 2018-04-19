@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hello Bustracker!</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+        <nav class="navbar navbar-dark bg-dark">
+          <div class="container-fluid">
+          <span class="navbar-brand head1">
+            Bustracker
+          </span>
+          <ul class="nav navbar-nav mr-auto">
+            <%= if @current_user do %>
+              <nav-item>
+                <%= link "Dashboard", to: page_path(@conn, :bustracker), class: "nav-link links inline1" %>
+                <%= link "History", to: page_path(@conn, :history), class: "nav-link links inline1" %>
+                <%= link "Edit", to: user_path(@conn, :edit, Bustracker.Accounts.get_user!(@current_user.id)), class: "nav-link links inline1" %>
+              </nav-item>
+            <% end %>
+          </ul>
+            <ul class="nav navbar-nav ml-auto">
+              <%= if @current_user do %>
+                <span class="links p-white inline1">Logged in as <%= @current_user.name %> |
+                <nav-item>
+                  <%= link "Log Out", to: "/session", method: :delete, class: "nav-link links inline1" %>
+                </nav-item></span>
+              <% else %>
+              <nav-item>
+                  <%= link "Login", to: page_path(@conn, :index), class: "nav-link links inline1" %>
+                  <%= link "Register", to: user_path(@conn, :new), class: "nav-link links inline1" %>
+              </nav-item>
+              <% end %>
+            </ul>
+          </div>
+        </nav>
+        <br>
+
+        <%= if get_flash(@conn, :info) do %>
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <% end %>
+        <%= if get_flash(@conn, :error) do %>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <% end %>
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+    </div>
+      </div>
+    </div>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script>
+          $(function(){
+          var current = location.pathname;
+          console.log(current);
+          $('nav ul nav-item a').each(function(){
+              var $this = $(this);
+              $this.removeClass('active');
+              // if the current path is like this link, make it active
+              if($this.attr('href')===current){
+                  $this.addClass('active');
+              }
+              if(current==="/users" && $this.attr('href')==="/users/new")
+                $this.addClass('active');
+          })
+        })
+    </script>
+  </body>
+</html>

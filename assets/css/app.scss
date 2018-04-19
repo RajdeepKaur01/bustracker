@@ -1,0 +1,98 @@
+@import "bootstrap";
+span {
+  color: red;
+  font-size: 15px;
+}
+.success-msg {
+  color: green;
+  font-size: 22px;
+}
+.span-padding {
+  padding-bottom: 5px;
+}
+.dcenter {
+  padding: 30px;
+}
+.floatr {
+  float: right;
+}
+.width1 {
+  width: 10%;
+}
+.width2 {
+  width: 15%;
+}
+.width3 {
+  width: 30%;
+}
+.width4 {
+  width: 20%;
+}
+.inline1 {
+  display: inline-block;
+}
+p {
+  font-size: 25px;
+  font-weight: bold;
+}
+.label1 {
+  width: 120px;
+}
+.links {
+  font-size: 20px;
+  border-style: none;
+}
+.head1 {
+  font-size: 27px;
+  font-weight: bold;
+}
+.p-white {
+  color: white;
+}
+// The gray background
+.backdrop1 {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.3);
+  padding: 50;
+
+};
+
+.blue {
+  color: #3B5998;
+}
+
+// The modal "window"
+.modal1 {
+  background-color:  white;
+  borderRadius: 5;
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  padding: 30;
+  overflow: auto;
+};
+.over1 {
+  overflow-x: auto;
+}
+.space1 {
+  height: 100px;
+}
+.mheader {
+  height: 50px;
+  color: white;
+  padding: 10px;
+  position: fixed;
+  width: 50%;
+  overflow: auto;
+}
+.modalheadfont{
+  color: white;
+  font-size: 16px;
+}
+.tablediv {
+  overflow-x: auto;
+}

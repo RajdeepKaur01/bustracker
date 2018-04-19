@@ -1,0 +1,5 @@
+<span class="blue">**Leave password blank if you don't want to edit password</span>
+
+<%= render "form.html", Map.put(assigns, :action, user_path(@conn, :update, @user)) %>
+
+<!-- <span><%= link "Back", to: user_path(@conn, :index) %></span> -->
