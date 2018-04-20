@@ -35,12 +35,12 @@ class Board extends React.Component {
     if(this.state.busUpdateBool){
       setTimeout(()=> {this.channel.push("busUpdate1",{ tripid: this.state.selTrip })
         .receive("ok", this.gotView.bind(this))},10000);
-        console.log("hello inside");
+      //  console.log("hello inside");
     }
     else{
       setTimeout(()=> {this.channel.push("predictions",{ stopId: this.state.stopId })
         .receive("ok", this.gotView.bind(this))},30000);
-        console.log("hello outside");
+      //  console.log("hello outside");
     }
   }
   getNearestStop(){
@@ -58,7 +58,7 @@ class Board extends React.Component {
       .receive("ok", this.gotView.bind(this));
   }
   getSelStops(ev){
-    console.log(ev.target.id,"Trip ID");
+  //  console.log(ev.target.id,"Trip ID");
     this.channel.push("allStopsForRoute",{ routeid: ev.target.text , tripid: ev.target.id })
       .receive("ok", this.gotView.bind(this));
   }
@@ -118,12 +118,10 @@ function Predict(props){
 
   let uu=props.uu;
   let root=props.root;
-  let schedule_arrival = root.state.predictions.included.find(item => item.id == uu.relationships.schedule.data.id).attributes.arrival_time;
+  let schedule_arrival = root.state.predictions.included==undefined?"": root.state.predictions.included.find(item => item.id == uu.relationships.schedule.data.id).attributes.arrival_time;
 
   // to save history
   function add_log() {
-    console.log(current_user_id);
-    console.log("user");
     let text = JSON.stringify({
       log: {
           directionId: uu.attributes.direction_id==0?"Outbound":"Inbound",
@@ -149,7 +147,7 @@ function Predict(props){
     <tr key={"pr"+uu.id}>
       <td><a href="#" onClick={props.getSelStops} id={uu.relationships.trip.data.id}>{uu.relationships.route.data.id}</a></td>
       <td>{uu.attributes.direction_id==0?"Outbound":"Inbound"}</td>
-      <td>{schedule_arrival.substring(0,(schedule_arrival).length-6)}</td>
+      <td>{schedule_arrival==""||schedule_arrival==null? "Not Available" : schedule_arrival.substring(0,(schedule_arrival).length-6)}</td>
       <td>{uu.attributes.arrival_time==null?"Not Available":uu.attributes.arrival_time.substring(0,(uu.attributes.arrival_time).length-6)}</td>
       <td>{uu.attributes.departure_time==null?"Not Available":uu.attributes.departure_time.substring(0,(uu.attributes.departure_time).length-6)}</td>
       <td><a href="#" onClick={props.getBusUpdate} id={uu.relationships.trip.data.id}>Live-Update </a>
