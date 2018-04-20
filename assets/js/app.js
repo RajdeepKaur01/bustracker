@@ -27,7 +27,7 @@ import run_demo from "./bustracker";
      if (navigator.geolocation) {
          navigator.geolocation.watchPosition(showPosition,
             showError,
-            { enableHighAccuracy: true, timeout: 10*100*1000 }
+            { enableHighAccuracy: true }
           );
      }
    }

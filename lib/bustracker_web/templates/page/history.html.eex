@@ -28,10 +28,10 @@
             <td><%= uu.route %></td>
             <td><%= uu.stop %></td>
             <td><%= uu.directionId %></td>
-            <td><%= if !(uu.schedule==nil) do String.slice(NaiveDateTime.to_string(uu.schedule),0..10) end %><br/>
+            <td><%= if !(uu.schedule==nil) do String.slice(NaiveDateTime.to_string(uu.schedule),0..10) else "--" end %><br/>
                 <%= if !(uu.schedule==nil) do %> <b> <%= String.slice(NaiveDateTime.to_string(uu.schedule),11..18) %> </b> <% end %></td>
             <td><%= if !(uu.predicted==nil) do String.slice(NaiveDateTime.to_string(uu.predicted),0..10) end%>
-                <%= if (uu.predicted==nil) do "--" end %> 
+                <%= if (uu.predicted==nil) do "--" end %>
                 <br/>
                 <%= if !(uu.predicted==nil) do %> <b> <%= String.slice(NaiveDateTime.to_string(uu.predicted),11..18) %> </b> <% end %></td>
             <td><%= link "Delete", to: log_path(@conn, :delete, uu.id), method: :delete, class: "btn btn-danger btn-xs" %></span></td>

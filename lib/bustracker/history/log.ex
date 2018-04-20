@@ -19,6 +19,6 @@ defmodule Bustracker.History.Log do
   def changeset(log, attrs) do
     log
     |> cast(attrs, [:stop, :route, :directionId, :schedule, :predicted, :user_id])
-    |> validate_required([:stop, :route, :directionId, :schedule, :user_id])
+    |> validate_required([:stop, :route, :directionId, :user_id])
   end
 end

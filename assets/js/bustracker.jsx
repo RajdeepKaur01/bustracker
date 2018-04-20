@@ -118,7 +118,7 @@ function Predict(props){
 
   let uu=props.uu;
   let root=props.root;
-  let schedule_arrival = root.state.predictions.included==undefined?"": root.state.predictions.included.find(item => item.id == uu.relationships.schedule.data.id).attributes.arrival_time;
+  let schedule_arrival = root.state.predictions.included==undefined?null: root.state.predictions.included.find(item => item.id == uu.relationships.schedule.data.id).attributes.arrival_time;
 
   // to save history
   function add_log() {
@@ -127,7 +127,7 @@ function Predict(props){
           directionId: uu.attributes.direction_id==0?"Outbound":"Inbound",
           predicted: uu.attributes.arrival_time,
           route: uu.relationships.route.data.id,
-          schedule: schedule_arrival,
+          schedule: schedule_arrival==null?null:schedule_arrival,
           stop: $('#mySelect :selected').text(),
           user_id: current_user_id,
         },
@@ -147,7 +147,7 @@ function Predict(props){
     <tr key={"pr"+uu.id}>
       <td><a href="#" onClick={props.getSelStops} id={uu.relationships.trip.data.id}>{uu.relationships.route.data.id}</a></td>
       <td>{uu.attributes.direction_id==0?"Outbound":"Inbound"}</td>
-      <td>{schedule_arrival==""||schedule_arrival==null? "Not Available" : schedule_arrival.substring(0,(schedule_arrival).length-6)}</td>
+      <td>{schedule_arrival==null? "Not Available" : schedule_arrival.substring(0,(schedule_arrival).length-6)}</td>
       <td>{uu.attributes.arrival_time==null?"Not Available":uu.attributes.arrival_time.substring(0,(uu.attributes.arrival_time).length-6)}</td>
       <td>{uu.attributes.departure_time==null?"Not Available":uu.attributes.departure_time.substring(0,(uu.attributes.departure_time).length-6)}</td>
       <td><a href="#" onClick={props.getBusUpdate} id={uu.relationships.trip.data.id}>Live-Update </a>
