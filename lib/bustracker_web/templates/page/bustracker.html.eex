@@ -8,7 +8,7 @@
     </script>
 
     <div id="root">
-      <p>React app not loaded...</p>
+      <p>Loading App...</p>
     </div>
   </div>
 </div>

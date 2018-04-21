@@ -30,7 +30,7 @@ class Board extends React.Component {
     .receive("error", resp => { console.log("Unable to join", resp) });
   }
   gotView(view){
-    // console.log(view);
+    console.log(view);
     this.setState(view.track);
     if(this.state.busUpdateBool){
       setTimeout(()=> {this.channel.push("busUpdate1",{ tripid: this.state.selTrip })
@@ -90,6 +90,7 @@ class Board extends React.Component {
         <button className="btn btn-primary" onClick={()=>this.getNearestStop()}>Get Nearest Bus Stop</button>
         {sourcehead}
         {source}
+        <br/>
         <div className="over1">
         <table className="table table-striped">
           <thead>

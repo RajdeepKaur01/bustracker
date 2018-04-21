@@ -25,9 +25,9 @@ import run_demo from "./bustracker";
    let root = document.getElementById('root');
    if(root){
      if (navigator.geolocation) {
-         navigator.geolocation.watchPosition(showPosition,
+         navigator.geolocation.getCurrentPosition(showPosition,
             showError,
-            { enableHighAccuracy: true }
+            { enableHighAccuracy: true, timeout: 5000 }
           );
      }
    }
